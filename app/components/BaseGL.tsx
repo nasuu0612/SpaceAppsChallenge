@@ -5,17 +5,38 @@ import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 
 export default function BaseGL() {
-  const [texName, setTexName] = useState("earth1.jpeg");
-  const earthMap = useLoader(TextureLoader, `/image/${texName}`);
+  // スライダーの値 (0,1,2...) に応じてテクスチャ名を切り替える
+  const [texIndex, setTexIndex] = useState(0);
+  const texList = ["earth1.jpeg", "earth2.jpeg"];
+
+  const earthMap = useLoader(TextureLoader, `/image/${texList[texIndex]}`);
 
   return (
     <main style={{ width: "100vw", height: "100vh" }}>
-      {/* 切り替えボタン */}
-      <div style={{ position: "absolute", top: 20, left: 20, zIndex: 10, color:"white" }}>
-        <button onClick={() => setTexName("earth1.jpeg")} style={{padding: 20}}>Earth 1</button>
-        <button onClick={() => setTexName("earth2.jpeg")} style={{padding: 20}}>Earth 2</button>
+      {/* スライダー UI */}
+      <div
+        style={{
+          position: "absolute",
+          top: 20,
+          left: 20,
+          zIndex: 10,
+          background: "rgba(0,0,0,0.5)",
+          padding: "10px",
+          borderRadius: "8px",
+          color: "white",
+        }}
+      >
+        <input
+          type="range"
+          min="0"
+          max={texList.length - 1}
+          value={texIndex}
+          onChange={(e) => setTexIndex(Number(e.target.value))}
+        />
+        <div>表示中: {texList[texIndex]}</div>
       </div>
 
+      {/* Three.js Canvas */}
       <Canvas>
         <color attach="background" args={["#050505"]} />
         <ambientLight intensity={3} />
