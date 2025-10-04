@@ -3,7 +3,7 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 export default function BaseGL() {
-   const earthMap = useLoader(TextureLoader,"/image/earth.jpeg")
+   const earthMap = useLoader(TextureLoader,"/image/earth2.jpeg")
     return (
         <main style={{width: "100vw", height: "100vh"}}>
             <Canvas>
