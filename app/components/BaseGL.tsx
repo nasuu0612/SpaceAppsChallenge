@@ -59,6 +59,7 @@ export default function BaseGL() {
           maxDistance={300}
           rotateSpeed={0.4}
           zoomSpeed={0.5}
+          enablePan={false} 
         />
         <mesh position={[0, 0, 0]}>
           {/* ベースの黒球 */}
