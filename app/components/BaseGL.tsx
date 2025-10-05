@@ -37,12 +37,12 @@ export default function BaseGL() {
       </div>
 
       {/* Three.js Canvas */}
-      <Canvas>
+      <Canvas camera={{ position: [0, 0, 220], fov: 60 }}>
         <color attach="background" args={["#050505"]} />
         <ambientLight intensity={3} />
         <OrbitControls
-          minDistance={101}
-          maxDistance={200}
+          minDistance={150}
+          maxDistance={300}
           rotateSpeed={0.4}
           zoomSpeed={0.5}
         />
