@@ -77,6 +77,42 @@ export default function BaseGL() {
 
   return (
     <main style={{ width: "100vw", height: "100vh", background: "transparent" }}>
+      {/* NDVIカラーチャート */}
+  <div
+    style={{
+      position: "absolute",
+      top: "50%",
+      right: "30px",
+      transform: "translateY(-50%)",
+      zIndex: 10,
+      width: "20px",
+      height: "250px",
+      borderRadius: "5px",
+      background:
+        "linear-gradient(to top, #841a00ff, #ffb347, #ffff00, #00ff00, #006400)",
+      border: "1px solid white",
+    }}
+  ></div>
+
+  {/* カラーチャートラベル */}
+  <div
+    style={{
+      position: "absolute",
+      top: "calc(50% - 125px)",
+      right: "60px",
+      zIndex: 10,
+      height: "250px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      color: "white",
+      fontSize: "14px",
+      textAlign: "right",
+    }}
+  >
+    <span>多い</span>
+    <span>少ない</span>
+  </div>
       {/* スライダー UI */}
       <div
         style={{
