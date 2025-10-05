@@ -1,18 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 
 export default function BaseGL() {
-  // スライダーの値 (0,1,2...) に応じてテクスチャ名を切り替える
   const [texIndex, setTexIndex] = useState(0);
-  const texList = ["earth1.jpeg", "earth2.jpeg"];
+  const [texList, setTexList] = useState<string[]>([]); // ← useState 追加
 
+  useEffect(() => {
+    fetch("/api/images")
+      .then((res) => res.json())
+      .then((files) => setTexList(files));
+  }, []);
+
+  // texList が空の間はまだロードできないので return
+  if (texList.length === 0) return <div>Loading...</div>;
   const earthMap = useLoader(TextureLoader, `/image/${texList[texIndex]}`);
 
   return (
-    <main style={{ width: "100vw", height: "100vh" }}>
+    <main style={{ width: "100vw", height: "100vh", background: "transparent" }}>
       {/* スライダー UI */}
       <div
         style={{
@@ -37,8 +44,10 @@ export default function BaseGL() {
       </div>
 
       {/* Three.js Canvas */}
-      <Canvas camera={{ position: [0, 0, 220], fov: 60 }}>
+      <Canvas camera={{ position: [0, 0, 220], fov: 60 }} gl={{ alpha: true }}>
+        {/* 背景色を完全に透過させたいなら ↓ を削除する */}
         <color attach="background" args={["#050505"]} />
+        
         <ambientLight intensity={3} />
         <OrbitControls
           minDistance={150}
@@ -48,7 +57,11 @@ export default function BaseGL() {
         />
         <mesh castShadow position={[0, 0, 0]}>
           <sphereGeometry args={[100, 128, 64]} />
-          <meshPhysicalMaterial map={earthMap} />
+          <meshPhysicalMaterial
+            map={earthMap}
+            transparent={true}
+            alphaTest={0.5}   // 必要なら追加
+          />
         </mesh>
       </Canvas>
     </main>
