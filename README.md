@@ -3,6 +3,11 @@
 ## demo
 https://youtu.be/783MlpIvSS4
 
+## spaceappschallenge
+https://www.spaceappschallenge.org/2025/
+
+##
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
