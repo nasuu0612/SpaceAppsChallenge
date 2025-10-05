@@ -51,7 +51,7 @@ export default function BaseGL() {
       {/* Three.js Canvas */}
       <Canvas camera={{ position: [0, 0, 220], fov: 60 }} gl={{ alpha: true }}>
         {/* 背景色を完全に透過させたいなら ↓ を削除する */}
-        <color attach="background" args={["#fff"]} />
+        <color attach="background" args={["#000000"]} />
 
         <ambientLight intensity={3} />
         <OrbitControls
@@ -64,7 +64,7 @@ export default function BaseGL() {
         <mesh position={[0, 0, 0]}>
           {/* ベースの黒球 */}
           <sphereGeometry args={[100, 128, 64]} />
-          <meshStandardMaterial color="#1e125e" />
+          <meshStandardMaterial color="#38277d" />
         </mesh>
         <mesh castShadow position={[0, 0, 0]}>
           <sphereGeometry args={[100.1, 128, 64]} />
