@@ -4,6 +4,8 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import { TextureLoader } from "three"
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
   // 緯度経度 → 球面座標変換
   function latLonToXYZ(lat: number, lon: number, radius: number): [number, number, number] {
     const phi = (90 - lat) * (Math.PI / 180);
@@ -120,13 +122,13 @@ export default function BaseGL() {
       </div>
 
       {/* Three.js Canvas */}
-      <Canvas camera={{ position: [0, 0, 220], fov: 60 }} gl={{ alpha: true }}>
+      <Canvas camera={{ position: [0, 0, 300], fov: 60 }} gl={{ alpha: true }}>
         {/* 背景色を完全に透過させたいなら ↓ を削除する */}
         <color attach="background" args={["#000000"]} />
 
         <ambientLight intensity={3} />
         <OrbitControls
-          minDistance={150}
+          minDistance={typeof window !== "undefined" && window.innerWidth < 768 ? 100 : 150}
           maxDistance={300}
           rotateSpeed={0.4}
           zoomSpeed={0.5}
