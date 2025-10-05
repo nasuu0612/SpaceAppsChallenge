@@ -24,8 +24,9 @@ export default function BaseGL() {
       <div
         style={{
           position: "absolute",
-          top: 20,
-          left: 20,
+          bottom: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
           zIndex: 10,
           background: "rgba(0,0,0,0.5)",
           padding: "10px",
@@ -39,6 +40,10 @@ export default function BaseGL() {
           max={texList.length - 1}
           value={texIndex}
           onChange={(e) => setTexIndex(Number(e.target.value))}
+          style={{
+            width: "80vw",   // 横幅
+            height: "20px",   // 縦の太さ
+          }}
         />
         <div>表示中: {texList[texIndex]}</div>
       </div>
