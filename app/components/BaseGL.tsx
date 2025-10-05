@@ -107,7 +107,7 @@ export default function BaseGL() {
             height: "20px",   // 縦の太さ
           }}
         />
-        <div style={{ fontSize: "1.5vw" }}>
+        <div>
           表示中: {
             texList[texIndex]
               ? (() => {
