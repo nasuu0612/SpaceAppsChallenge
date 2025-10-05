@@ -15,7 +15,11 @@ export default function BaseGL() {
   }, []);
 
   // texList が空の間はまだロードできないので return
-  if (texList.length === 0) return <div>Loading...</div>;
+  if (texList.length === 0)
+    return
+  <div style={{ width: "100vw", height: "100vh", background: "black", textAlign: "center" }}>
+    Loading...
+  </div>;
   const earthMap = useLoader(TextureLoader, `/image/${texList[texIndex]}`);
 
   return (
@@ -45,7 +49,18 @@ export default function BaseGL() {
             height: "20px",   // 縦の太さ
           }}
         />
-        <div>表示中: {texList[texIndex]}</div>
+        <div style={{fontSize:"1.7vw"}}>
+          表示中: {
+          texList[texIndex]
+            ? (() => {
+              const name = texList[texIndex].replace(/\..+$/, ""); // 拡張子除去
+              const year = name.substring(0, 4);
+              const month = name.substring(4, 6);
+              const day = name.substring(6, 8);
+              return `${year}年 ${month}月 ${day}日`;
+            })()
+            : ""
+        }</div>
       </div>
 
       {/* Three.js Canvas */}
@@ -59,7 +74,7 @@ export default function BaseGL() {
           maxDistance={300}
           rotateSpeed={0.4}
           zoomSpeed={0.5}
-          enablePan={false} 
+          enablePan={false}
         />
         <mesh position={[0, 0, 0]}>
           {/* ベースの黒球 */}
